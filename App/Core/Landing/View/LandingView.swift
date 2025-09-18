@@ -67,12 +67,6 @@ struct LandingView: View {
                                     primaryVM.topCoinsSortOption = .rank
                                 }
                             
-                            MarketView()
-                                .tag(Tab.market)
-                                .onDisappear {
-                                    primaryVM.newsSearchBarText = ""
-                                }
-                            
                             FutureView()
                                 .tag(Tab.future)
                             
@@ -129,14 +123,10 @@ extension LandingView {
                 .frame(width: 300, height: 300)
                 .padding(.bottom)
             
-            Text("Coin Portfolio Tracker")
+            Text("Blockfolio")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundStyle(themeVM.textColorTheme.primaryText)
-            
-            Text("Developed by Jacob Douglas")
-                .font(.title3)
-                .foregroundStyle(themeVM.textColorTheme.secondaryText)
             
             Spacer()
         }

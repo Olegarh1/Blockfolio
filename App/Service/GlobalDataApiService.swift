@@ -16,17 +16,19 @@ class GlobalDataApiService {
     
     // Updates global data (e.g., total volume)
     func getGlobalData() {
-        guard let url = URL(string: GeneralUtility.serverBaseUrl + "/api/v1/crypto/globalData") else { return }
+        guard let url = URL(string: GeneralUtility.serverBaseUrl + "/api/v3/global") else { return }
         
         NetworkingManager.download(url: url)
             .decode(type: ApiResponse<GlobalData>.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { status in
                 switch status {
-                    case .failure:
-                        return
-                    case .finished:
-                        break
+                case .failure(let error):
+                    print("❌ GlobalDataApiService Network / Decoding error: \(error)")
+                    return
+                case .finished:
+                    print("✅ GlobalDataApiService Request finished successfully")
+                    break
                 }
             }, receiveValue: { [weak self] container in
                 self?.globalData = container.data

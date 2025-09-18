@@ -4,7 +4,6 @@ import Foundation
 enum Tab: String, CaseIterable {
     case portfolio = "Portfolio",
          topCoins = "Top Coins",
-         market = "Market",
          future = "Future",
          settings = "Settings"
     
@@ -15,8 +14,6 @@ enum Tab: String, CaseIterable {
                 return "tray"
             case .topCoins:
                 return "chart.bar"
-            case .market:
-                return "doc.richtext"
             case .future:
                 return "binoculars"
             case .settings:
@@ -31,8 +28,6 @@ enum Tab: String, CaseIterable {
                 return "tray.fill"
             case .topCoins:
                 return "chart.bar.fill"
-            case .market:
-                return "doc.richtext.fill"
             case .future:
                 return "binoculars.fill"
             case .settings:

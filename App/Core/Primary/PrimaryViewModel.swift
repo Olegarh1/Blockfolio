@@ -15,9 +15,6 @@ class PrimaryViewModel: ObservableObject {
     @Published var globalDataSummaries: [any Summarizable] = []
     @Published var globalDataLastUpdated = ""
     
-    @Published var newsFeed: [News] = []
-    @Published var newsFeedLastUpdated = ""
-    
     // Dictionary of user portfolio objects to tuple of coins, values, and summaries
     // K: portfolio id, V: tuple
     // Tuple: 0. coins array, 1. portfolio value, 2. portfolio cost basis, 3. summaries, 4. contains any holdings data (or just watchlist)
@@ -48,7 +45,6 @@ class PrimaryViewModel: ObservableObject {
     private let globalDataApiService = GlobalDataApiService()
     private let trendingApiService = TrendingDataApiService()
     private let managedDataService = ManagedDataService()
-    private let newsFeedApiService = NewsFeedApiService()
     
     private var subscribers = Set<AnyCancellable>()
     
@@ -61,7 +57,6 @@ class PrimaryViewModel: ObservableObject {
         setupGlobalDataSub()
         setupTrendingCoinsSub()
         setupManagedCoinsSub()
-        setupNewsFeedSub()
     }
     
     private func setupAllCoinsSub() {
@@ -317,31 +312,6 @@ class PrimaryViewModel: ObservableObject {
             .store(in: &subscribers)
     }
     
-    private func setupNewsFeedSub() {
-        newsFeedApiService.$newsFeed
-            .combineLatest($newsSortOption, newsFeedApiService.$lastUpdated, $newsSearchBarText)
-            .map { (feed, sortOption, lastUpdated, filter) -> ([News], String) in
-                var feed = feed
-                
-                if !filter.isEmpty {
-                    let filter = filter.lowercased()
-                    
-                    // Compare against title, publisher name
-                    feed = feed.filter({ $0.title.lowercased().contains(filter)
-                        || $0.publisherName.lowercased().contains(filter) })
-                }
-                
-                self.sortNewsFeed(sort: sortOption, news: &feed)
-                
-                return (feed, lastUpdated)
-            }
-            .sink { [weak self] (result, lastUpdated) in
-                self?.newsFeed = result
-                self?.newsFeedLastUpdated = lastUpdated
-            }
-            .store(in: &subscribers)
-    }
-    
     // Sorts the coins array in-place
     private func sortCoins(sort: SortOption, coins: inout [Coin]) {
         switch sort {
@@ -368,18 +338,6 @@ class PrimaryViewModel: ObservableObject {
                 
             case .reversePercentChange:
                 return coins.sort(by: { $0.priceChangePercentage24H ?? 0.0 > $1.priceChangePercentage24H ?? 0.0 })
-        }
-    }
-    
-    // Sorts the news array in-place
-    // Date needs to already be parsed -- parsing in this function causes severe bottleneck
-    private func sortNewsFeed(sort: NewsSortOption, news: inout [News]) {
-        switch sort {
-            case .date:
-                return news.sort(by: { $0.publishedDate.compare($1.publishedDate) == .orderedDescending })
-                
-            case .reverseDate:
-                return news.sort(by: { $0.publishedDate.compare($1.publishedDate) == .orderedAscending })
         }
     }
 }
@@ -476,7 +434,6 @@ extension PrimaryViewModel {
         marketDataApiService.getAllCoins()
         globalDataApiService.getGlobalData()
         trendingApiService.getTrendingCoins()
-        newsFeedApiService.getNews()
     }
     
     // Coin functions:

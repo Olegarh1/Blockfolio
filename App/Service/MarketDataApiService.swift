@@ -29,12 +29,14 @@ class MarketDataApiService {
             .sink(receiveCompletion: { status in
                 switch status {
                 case .failure(let error):
-                    print("❌ Network / Decoding error: \(error)")
+                    print("❌ MarketDataApiService Network / Decoding error: \(error)")
+                    return
                 case .finished:
-                    print("✅ Request finished successfully")
+                    print("✅ MarketDataApiService Request finished successfully")
+                    break
                 }
             }, receiveValue: { [weak self] container in
-                print("Full response: \(container)")
+                print("MarketDataApiService Full response: \(container)")
                 self?.allCoins = container
 //                self?.lastUpdated = container.lastUpdated?.asFormattedDate(dateType: .lastUpdated) ?? ""
             })

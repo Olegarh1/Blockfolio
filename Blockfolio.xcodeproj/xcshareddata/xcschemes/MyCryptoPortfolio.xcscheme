@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BD924CCA2B23BD32008836AB"
-               BuildableName = "Coin Portfolio Tracker.app"
-               BlueprintName = "Coin Portfolio Tracker"
-               ReferencedContainer = "container:Coin Portfolio Tracker.xcodeproj">
+               BuildableName = "Blockfolio.app"
+               BlueprintName = "Blockfolio"
+               ReferencedContainer = "container:Blockfolio.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD924CCA2B23BD32008836AB"
-            BuildableName = "Coin Portfolio Tracker.app"
-            BlueprintName = "Coin Portfolio Tracker"
-            ReferencedContainer = "container:Coin Portfolio Tracker.xcodeproj">
+            BuildableName = "Blockfolio.app"
+            BlueprintName = "Blockfolio"
+            ReferencedContainer = "container:Blockfolio.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD924CCA2B23BD32008836AB"
-            BuildableName = "Coin Portfolio Tracker.app"
-            BlueprintName = "Coin Portfolio Tracker"
-            ReferencedContainer = "container:Coin Portfolio Tracker.xcodeproj">
+            BuildableName = "Blockfolio.app"
+            BlueprintName = "Blockfolio"
+            ReferencedContainer = "container:Blockfolio.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

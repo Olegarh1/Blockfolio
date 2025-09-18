@@ -22,14 +22,6 @@ struct LastRefreshView: View {
         }
     }
     
-    private var newsMessage: String {
-        if primaryVM.newsFeedLastUpdated.isEmpty {
-            return "Unable to determine last refresh for news feed"
-        } else {
-            return "News feed last refreshed " + primaryVM.newsFeedLastUpdated
-        }
-    }
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -96,16 +88,6 @@ struct LastRefreshView: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             Divider()
-                            
-                            VStack(alignment: .leading, spacing: 5.0) {
-                                Text(newsMessage)
-                                    .font(.headline)
-                                    .foregroundStyle(themeVM.textColorTheme.primaryText)
-                                
-                                Text("Article headlines are refreshed every 60 minutes.")
-                                    .font(.caption)
-                                    .foregroundStyle(themeVM.textColorTheme.secondaryText)
-                            }
                         }
                         .padding([.horizontal, .bottom])
                         

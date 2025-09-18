@@ -15,17 +15,19 @@ class TrendingDataApiService {
     
     // Updates published trending coin data
     func getTrendingCoins() {
-        guard let url = URL(string: GeneralUtility.serverBaseUrl + "/api/v1/crypto/trendingData") else { return }
+        guard let url = URL(string: GeneralUtility.serverBaseUrl + "/api/v3/search/trending") else { return }
         
         NetworkingManager.download(url: url)
             .decode(type: ApiResponse<[TrendingCoin]>.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { status in
                 switch status {
-                    case .failure:
-                        return
-                    case .finished:
-                        break
+                case .failure(let error):
+                    print("❌ TrendingDataApiService Network / Decoding error: \(error)")
+                    return
+                case .finished:
+                    print("✅ TrendingDataApiService Request finished successfully")
+                    break
                 }
             }, receiveValue: { [weak self] container in
                 self?.trendingCoins = container.data
