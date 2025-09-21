@@ -55,11 +55,17 @@ class DetailViewModel: ObservableObject {
         // ~7 days
         values7Days = [Double](repeating: 0.0, count: count)
         // ~5 days
-        values5Days = [Double](repeating: 0.0, count: count - 48)
+        if count >= 48 {
+            values5Days = [Double](repeating: 0.0, count: count - 48)
+        }
         // ~3 days
-        values3Days = [Double](repeating: 0.0, count: count - 96)
+        if count >= 96 {
+            values3Days = [Double](repeating: 0.0, count: count - 96)
+        }
         // ~1 day
-        values1Days = [Double](repeating: 0.0, count: count - 144)
+        if count >= 144 {
+            values1Days = [Double](repeating: 0.0, count: count - 144)
+        }
         
         for i in 0..<count {
             values7Days[i] += data[i]
@@ -82,6 +88,9 @@ class DetailViewModel: ObservableObject {
     }
     
     private func getOverviewSummaries(values: [Double]) -> [any Summarizable] {
+        guard values.count > 0 else {
+            return [ CurrencySummary(title: "Starting Value", value: 0, isChange: false)]
+        }
         let startingValue = values[0]
         let endingValue = values[values.count - 1]
         

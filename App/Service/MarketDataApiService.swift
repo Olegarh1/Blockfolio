@@ -20,7 +20,7 @@ class MarketDataApiService {
     
     // Updates published coin data
     func getAllCoins() {
-        guard let url = URL(string: GeneralUtility.serverBaseUrl + "/api/v3/coins/markets?vs_currency=usd") else { return }
+        guard let url = URL(string: GeneralUtility.serverBaseUrl + "/api/v3/coins/markets?vs_currency=usd&sparkline=true") else { return }
         
         NetworkingManager.download(url: url)
             .decode(type: [Coin].self, decoder: decoder)
