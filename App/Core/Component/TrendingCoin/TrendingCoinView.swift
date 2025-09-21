@@ -30,7 +30,7 @@ struct TrendingCoinView: View {
                     .padding(.leading, 5)
                 
                 HStack(spacing: 0) {
-                    Text(String(trendingCoin.marketCapRank))
+                    Text(String(trendingCoin.marketCapRank ?? 0))
                         .font(.caption)
                         .foregroundStyle(themeViewModel.textColorTheme.secondaryText)
                         .padding(.leading, 5)

@@ -2,14 +2,14 @@ import Foundation
 
 // Represents a coin parsed from container from JSON response
 struct Coin: Identifiable, Codable {
-    let id: String // Unique identifier for each coin used throughout app
+    let id: String
     let symbol: String
     let name: String
     let image: String
     
     let currentPrice: Double
     let marketCapRank: Int
-    // Other properties may be null
+    
     let marketCap: Double?
     let fullyDilutedValuation: Double?
     let totalVolume: Double?
@@ -29,9 +29,7 @@ struct Coin: Identifiable, Codable {
     let priceChangePercentage30D: Double?
     let priceChangePercentage1Y: Double?
     
-    // 5 similar coins based on description -- only if description available
     let recommendedCoins: [String]?
-    
     let blockTime: Int?
     let hashingAlgorithm: String?
     let description: String?
@@ -41,138 +39,121 @@ struct Coin: Identifiable, Codable {
     let positiveSentimentPercentage: Double?
     
     let currentHoldings: Double?
-    var currentHoldingsValue: Double {
-        // Dynamically calculate current holdings value based on holdings * price
+    let costBasis: Double?
+    
+    var currentHoldingsValue: Double { // Dynamically calculate current holdings value based on holdings * price
         if currentHoldings == nil {
             return 0.0
         } else {
-            return currentHoldings! * currentPrice
-        }
+            return currentHoldings! * currentPrice }
     }
     
-    let costBasis: Double?
-    var averageCostPerCoin: Double {
-        // Dynamically calculate average cost per coin based on cost basis / holdings
+    var averageCostPerCoin: Double { // Dynamically calculate average cost per coin based on cost basis / holdings
         if let costBasis = costBasis, let currentHoldings = currentHoldings {
             if currentHoldings != 0.0 {
                 return costBasis / currentHoldings
             }
         }
-        
         return 0.0
     }
-    
     // Profit/loss (if cost basis available)
     var profitLossAmount: Double {
         if let costBasis = costBasis {
             return currentHoldingsValue - costBasis
         } else {
-            return 0.0
-        }
+            return 0.0 }
     }
     var profitLossPercentage: Double {
         if let costBasis = costBasis {
-            if costBasis != 0.0 {
-                // Calculate percent change by subtracting cost basis value from value and dividing by cost basis
+            if costBasis != 0.0 { // Calculate percent change by subtracting cost basis value from value and dividing by cost basis
                 return ((currentHoldingsValue - costBasis) / costBasis) * 100.0
             }
         }
-        
         return 0.0
     }
-    
-    init(id: String, symbol: String, name: String, image: String, currentPrice: Double, marketCap: Double?, marketCapRank: Double, fullyDilutedValuation: Double?, totalVolume: Double?, high24H: Double?, low24H: Double?, priceChange24H: Double?, priceChangePercentage24H: Double?, marketCapChange24H: Double?, marketCapChangePercentage24H: Double?, circulatingSupply: Double?, totalSupply: Double?, maxSupply: Double?, ath: Double?, athChangePercentage: Double?, athDate: String?, atl: Double?, atlChangePercentage: Double?, atlDate: String?, sparkLineIn7D: SparklineIn7D?, sparklineLastUpdated: String?, priceChangePercentage7D: Double?, priceChangePercentage14D: Double?, priceChangePercentage30D: Double?, priceChangePercentage1Y: Double?, recommendedCoins: [String]?, blockTime: Int?, hashingAlgorithm: String?, description: String?, homepageUrl: String?, subredditUrl: String?, genesisDate: String?, positiveSentimentPercentage: Double?, currentHoldings: Double?, costBasis: Double?) {
-        self.id = id
-        self.symbol = symbol.uppercased()
-        self.name = name
-        self.image = image
-        self.currentPrice = currentPrice
-        self.marketCap = marketCap
-        self.marketCapRank = Int(marketCapRank)
-        self.fullyDilutedValuation = fullyDilutedValuation
-        self.totalVolume = totalVolume
-        self.high24H = high24H
-        self.low24H = low24H
-        self.priceChange24H = priceChange24H
-        self.priceChangePercentage24H = priceChangePercentage24H
-        self.marketCapChange24H = marketCapChange24H
-        self.marketCapChangePercentage24H = marketCapChangePercentage24H
-        self.circulatingSupply = circulatingSupply
-        self.totalSupply = totalSupply
-        self.maxSupply = maxSupply
-        self.ath = ath
-        self.athChangePercentage = athChangePercentage
-        self.athDate = athDate
-        self.atl = atl
-        self.atlChangePercentage = atlChangePercentage
-        self.atlDate = atlDate
-        self.sparklineIn7D = sparkLineIn7D
-        self.sparklineLastUpdated = sparklineLastUpdated
-        self.priceChangePercentage7D = priceChangePercentage7D
-        self.priceChangePercentage14D = priceChangePercentage14D
-        self.priceChangePercentage30D = priceChangePercentage30D
-        self.priceChangePercentage1Y = priceChangePercentage1Y
-        self.recommendedCoins = recommendedCoins
-        self.blockTime = blockTime
-        self.hashingAlgorithm = hashingAlgorithm
-        self.description = description
-        self.homepageUrl = homepageUrl
-        self.subredditUrl = subredditUrl
-        self.genesisDate = genesisDate
-        self.positiveSentimentPercentage = positiveSentimentPercentage
-        self.currentHoldings = currentHoldings
-        self.costBasis = costBasis
-    }
-    
-    // Constructs a new coin with an updated holdings/cost basis
-    private init(coin: Coin, updatedHoldings: Double, updatedCostBasis: Double) {
-        id = coin.id
-        symbol = coin.symbol
-        name = coin.name
-        image = coin.image
-        currentPrice = coin.currentPrice
-        marketCap = coin.marketCap
-        marketCapRank = coin.marketCapRank
-        fullyDilutedValuation = coin.fullyDilutedValuation
-        totalVolume = coin.totalVolume
-        high24H = coin.high24H
-        low24H = coin.low24H
-        priceChange24H = coin.priceChange24H
-        priceChangePercentage24H = coin.priceChangePercentage24H
-        marketCapChange24H = coin.marketCapChange24H
-        marketCapChangePercentage24H = coin.marketCapChangePercentage24H
-        circulatingSupply = coin.circulatingSupply
-        totalSupply = coin.totalSupply
-        maxSupply = coin.maxSupply
-        ath = coin.ath
-        athChangePercentage = coin.athChangePercentage
-        athDate = coin.athDate
-        atl = coin.atl
-        atlChangePercentage = coin.atlChangePercentage
-        atlDate = coin.atlDate
-        sparklineIn7D = coin.sparklineIn7D
-        sparklineLastUpdated = coin.sparklineLastUpdated
-        priceChangePercentage7D = coin.priceChangePercentage7D
-        priceChangePercentage14D = coin.priceChangePercentage14D
-        priceChangePercentage30D = coin.priceChangePercentage30D
-        priceChangePercentage1Y = coin.priceChangePercentage1Y
-        recommendedCoins = coin.recommendedCoins
-        blockTime = coin.blockTime
-        hashingAlgorithm = coin.hashingAlgorithm
-        description = coin.description
-        homepageUrl = coin.homepageUrl
-        subredditUrl = coin.subredditUrl
-        genesisDate = coin.genesisDate
-        positiveSentimentPercentage = coin.positiveSentimentPercentage
         
-        // Set new amounts
-        currentHoldings = updatedHoldings
-        costBasis = updatedCostBasis
+    enum CodingKeys: String, CodingKey {
+        case id, symbol, name, image
+        case currentPrice = "current_price"
+        case marketCap = "market_cap"
+        case marketCapRank = "market_cap_rank"
+        case fullyDilutedValuation = "fully_diluted_valuation"
+        case totalVolume = "total_volume"
+        case high24H = "high_24h"
+        case low24H = "low_24h"
+        case priceChange24H = "price_change_24h"
+        case priceChangePercentage24H = "price_change_percentage_24h"
+        case marketCapChange24H = "market_cap_change_24h"
+        case marketCapChangePercentage24H = "market_cap_change_percentage_24h"
+        case circulatingSupply = "circulating_supply"
+        case totalSupply = "total_supply"
+        case maxSupply = "max_supply"
+        case ath
+        case athChangePercentage = "ath_change_percentage"
+        case athDate = "ath_date"
+        case atl
+        case atlChangePercentage = "atl_change_percentage"
+        case atlDate = "atl_date"
+        case sparklineIn7D = "sparkline_in_7d"
+        case sparklineLastUpdated = "last_updated"
+        case priceChangePercentage7D = "price_change_percentage_7d_in_currency"
+        case priceChangePercentage14D = "price_change_percentage_14d_in_currency"
+        case priceChangePercentage30D = "price_change_percentage_30d_in_currency"
+        case priceChangePercentage1Y = "price_change_percentage_1y_in_currency"
+        case recommendedCoins, blockTime, hashingAlgorithm, description
+        case homepageUrl = "homepage"
+        case subredditUrl = "subreddit_url"
+        case genesisDate = "genesis_date"
+        case positiveSentimentPercentage = "sentiment_votes_up_percentage"
+        case currentHoldings, costBasis
     }
-    
-    // Update the user's current holdings and returns a new coin with the updated holding amount
+}
+
+extension Coin {
+    // Update the user's current holdings and returns a new coin with updated holdings + cost basis
     func updateCoin(updatedHoldings: Double, updatedCostBasis: Double) -> Coin {
-        return Coin(coin: self, updatedHoldings: updatedHoldings, updatedCostBasis: updatedCostBasis)
+        var copy = self
+        copy = Coin(id: self.id,
+                    symbol: self.symbol,
+                    name: self.name,
+                    image: self.image,
+                    currentPrice: self.currentPrice,
+                    marketCapRank: self.marketCapRank,
+                    marketCap: self.marketCap,
+                    fullyDilutedValuation: self.fullyDilutedValuation,
+                    totalVolume: self.totalVolume,
+                    high24H: self.high24H,
+                    low24H: self.low24H,
+                    priceChange24H: self.priceChange24H,
+                    priceChangePercentage24H: self.priceChangePercentage24H,
+                    marketCapChange24H: self.marketCapChange24H,
+                    marketCapChangePercentage24H: self.marketCapChangePercentage24H,
+                    circulatingSupply: self.circulatingSupply,
+                    totalSupply: self.totalSupply,
+                    maxSupply: self.maxSupply,
+                    ath: self.ath,
+                    athChangePercentage: self.athChangePercentage,
+                    athDate: self.athDate,
+                    atl: self.atl,
+                    atlChangePercentage: self.atlChangePercentage,
+                    atlDate: self.atlDate,
+                    sparklineIn7D: self.sparklineIn7D,
+                    sparklineLastUpdated: self.sparklineLastUpdated,
+                    priceChangePercentage7D: self.priceChangePercentage7D,
+                    priceChangePercentage14D: self.priceChangePercentage14D,
+                    priceChangePercentage30D: self.priceChangePercentage30D,
+                    priceChangePercentage1Y: self.priceChangePercentage1Y,
+                    recommendedCoins: self.recommendedCoins,
+                    blockTime: self.blockTime,
+                    hashingAlgorithm: self.hashingAlgorithm,
+                    description: self.description,
+                    homepageUrl: self.homepageUrl,
+                    subredditUrl: self.subredditUrl,
+                    genesisDate: self.genesisDate,
+                    positiveSentimentPercentage: self.positiveSentimentPercentage,
+                    currentHoldings: updatedHoldings,
+                    costBasis: updatedCostBasis)
+        return copy
     }
 }
 

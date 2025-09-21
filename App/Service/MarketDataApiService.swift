@@ -36,7 +36,6 @@ class MarketDataApiService {
                     break
                 }
             }, receiveValue: { [weak self] container in
-                print("MarketDataApiService Full response: \(container)")
                 self?.allCoins = container
 //                self?.lastUpdated = container.lastUpdated?.asFormattedDate(dateType: .lastUpdated) ?? ""
             })

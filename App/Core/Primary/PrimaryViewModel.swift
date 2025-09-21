@@ -101,13 +101,25 @@ class PrimaryViewModel: ObservableObject {
                 var summaries: [any Summarizable] = []
                 
                 // Create summary items
-                let totalMarketCap = CondensedCurrencySummary(title: "Total Market Cap", value: globalData?.totalMarketCap ?? 0.0)
-                let percentChange = PercentSummary(title: "% Change", value: globalData?.marketCapChangePercentage24H ?? 0.0, isChange: true)
-                let totalVolume = CondensedCurrencySummary(title: "Total Volume", value: globalData?.totalVolume ?? 0.0)
+                let totalMarketCap = CondensedCurrencySummary(title: "Total Market Cap",
+                                                              value: globalData?.totalMarketCap?["usd"] ?? 0.0)
+                let percentChange = PercentSummary(title: "% Change",
+                                                   value: globalData?.marketCapChangePercentage24HUsd ?? 0.0,
+                                                   isChange: true)
+                let totalVolume = CondensedCurrencySummary(title: "Total Volume",
+                                                           value: globalData?.totalVolume?["usd"] ?? 0.0)
                 
-                let btcMarketCapDominance = PercentSummary(title: "BTC Dominance", value: globalData?.btcMarketCapPercentage ?? 0.0, isChange: false)
-                let ethMarketCapDominance = PercentSummary(title: "ETH Dominance", value: globalData?.ethMarketCapPercentage ?? 0.0, isChange: false)
-                let activeCoins = IntSummary(title: "Active Coins", value: globalData?.activeCryptocurrencies ?? 0, isCondensed: true)
+                let btcMarketCapDominance = PercentSummary(title: "BTC Dominance",
+                                                           value: globalData?.marketCapPercentage?["btc"] ?? 0.0,
+                                                           isChange: false)
+                
+                let ethMarketCapDominance = PercentSummary(title: "ETH Dominance",
+                                                           value: globalData?.marketCapPercentage?["eth"] ?? 0.0,
+                                                           isChange: false)
+                
+                let activeCoins = IntSummary(title: "Active Coins",
+                                             value: globalData?.activeCryptocurrencies ?? 0,
+                                             isCondensed: true)
                 
                 summaries.append(totalMarketCap)
                 summaries.append(percentChange)
@@ -184,7 +196,7 @@ class PrimaryViewModel: ObservableObject {
                     // If no fresh data available, use old data; else, use fresh data
                     if unableToGetFreshData {
                         for managedCoin in managedCoins {
-                            let coin = Coin(id: managedCoin.id ?? "", symbol: managedCoin.symbol ?? "", name: managedCoin.name ?? "", image: managedCoin.image ?? "", currentPrice: managedCoin.lastPrice, marketCap: nil, marketCapRank: Double(managedCoin.marketCapRank), fullyDilutedValuation: nil, totalVolume: nil, high24H: nil, low24H: nil, priceChange24H: nil, priceChangePercentage24H: nil, marketCapChange24H: nil, marketCapChangePercentage24H: nil, circulatingSupply: nil, totalSupply: nil, maxSupply: nil, ath: nil, athChangePercentage: nil, athDate: nil, atl: nil, atlChangePercentage: nil, atlDate: nil, sparkLineIn7D: nil, sparklineLastUpdated: nil, priceChangePercentage7D: nil, priceChangePercentage14D: nil, priceChangePercentage30D: nil, priceChangePercentage1Y: nil, recommendedCoins: nil, blockTime: nil, hashingAlgorithm: nil, description: nil, homepageUrl: nil, subredditUrl: nil, genesisDate: nil, positiveSentimentPercentage: nil, currentHoldings: managedCoin.holdingAmount, costBasis: managedCoin.costBasis)
+                            let coin = Coin(id: managedCoin.id ?? "", symbol: managedCoin.symbol ?? "", name: managedCoin.name ?? "", image: managedCoin.image ?? "", currentPrice: managedCoin.lastPrice, marketCapRank: Int(Double(managedCoin.marketCapRank)), marketCap: nil, fullyDilutedValuation: nil, totalVolume: nil, high24H: nil, low24H: nil, priceChange24H: nil, priceChangePercentage24H: nil, marketCapChange24H: nil, marketCapChangePercentage24H: nil, circulatingSupply: nil, totalSupply: nil, maxSupply: nil, ath: nil, athChangePercentage: nil, athDate: nil, atl: nil, atlChangePercentage: nil, atlDate: nil, sparklineIn7D: nil, sparklineLastUpdated: nil, priceChangePercentage7D: nil, priceChangePercentage14D: nil, priceChangePercentage30D: nil, priceChangePercentage1Y: nil, recommendedCoins: nil, blockTime: nil, hashingAlgorithm: nil, description: nil, homepageUrl: nil, subredditUrl: nil, genesisDate: nil, positiveSentimentPercentage: nil, currentHoldings: managedCoin.holdingAmount, costBasis: managedCoin.costBasis)
                             
                             coinResult.append(coin)
                         }

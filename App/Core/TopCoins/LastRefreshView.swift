@@ -37,28 +37,7 @@ struct LastRefreshView: View {
                         CustomAlertView(customAlert: .serverOffline)
                             .padding(10)
                             .frame(maxWidth: .infinity)
-                    } else {
-                        VStack(alignment: .leading) {
-                            Text("Price Data")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundStyle(themeVM.textColorTheme.primaryText)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Divider()
-                            
-                            VStack(alignment: .leading, spacing: 5.0) {
-                                Text(priceDataMessage)
-                                    .font(.headline)
-                                    .foregroundStyle(themeVM.textColorTheme.primaryText)
-                                
-                                Text("Price and global statistic data are refreshed every 25 to 30 minutes.")
-                                    .font(.caption)
-                                    .foregroundStyle(themeVM.textColorTheme.secondaryText)
-                            }
-                        }
-                        .padding([.horizontal, .bottom])
-                        
+                    } else {                        
                         VStack(alignment: .leading) {
                             Text("Trending Coins")
                                 .font(.title)
@@ -77,17 +56,6 @@ struct LastRefreshView: View {
                                     .font(.caption)
                                     .foregroundStyle(themeVM.textColorTheme.secondaryText)
                             }
-                        }
-                        .padding([.horizontal, .bottom])
-                        
-                        VStack(alignment: .leading) {
-                            Text("News")
-                                .font(.title)
-                                .fontWeight(.bold)
-                                .foregroundStyle(themeVM.textColorTheme.primaryText)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            Divider()
                         }
                         .padding([.horizontal, .bottom])
                         

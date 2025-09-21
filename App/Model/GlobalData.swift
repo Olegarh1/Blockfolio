@@ -4,23 +4,34 @@ import Foundation
 struct GlobalData: Identifiable, Codable {
     var id = UUID().uuidString
     
-    // Market stats
     let activeCryptocurrencies: Int?
-    let totalMarketCap: Double
-    let totalVolume: Double
-    let marketCapChangePercentage24H: Double
+    let totalMarketCap: [String: Double]?
+    let totalVolume: [String: Double]?
+    let marketCapPercentage: [String: Double]?
+    let marketCapChangePercentage24HUsd: Double?
     
-    // Market cap dominance stats
-    let btcMarketCapPercentage: Double?
-    let ethMarketCapPercentage: Double?
+    enum CodingKeys: String, CodingKey {
+        case activeCryptocurrencies = "active_cryptocurrencies"
+        case totalMarketCap = "total_market_cap"
+        case totalVolume = "total_volume"
+        case marketCapPercentage = "market_cap_percentage"
+        case marketCapChangePercentage24HUsd = "market_cap_change_percentage_24h_usd"
+    }
     
-    // Need to mark what fields to parse explicitly using coding keys
-    private enum CodingKeys: String, CodingKey {
-        case activeCryptocurrencies
-        case totalMarketCap
-        case totalVolume
-        case marketCapChangePercentage24H
-        case btcMarketCapPercentage
-        case ethMarketCapPercentage
+    /// Зручно діставати USD напряму
+    var marketCapUsd: Double {
+        totalMarketCap?["usd"] ?? 0.0
+    }
+    
+    var volumeUsd: Double {
+        totalVolume?["usd"] ?? 0.0
+    }
+    
+    var btcDominance: Double {
+        marketCapPercentage?["btc"] ?? 0.0
+    }
+    
+    var ethDominance: Double {
+        marketCapPercentage?["eth"] ?? 0.0
     }
 }

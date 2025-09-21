@@ -18,21 +18,20 @@ class TrendingDataApiService {
         guard let url = URL(string: GeneralUtility.serverBaseUrl + "/api/v3/search/trending") else { return }
         
         NetworkingManager.download(url: url)
-            .decode(type: ApiResponse<[TrendingCoin]>.self, decoder: decoder)
+            .decode(type: TrendingResponse.self, decoder: decoder)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { status in
                 switch status {
                 case .failure(let error):
                     print("❌ TrendingDataApiService Network / Decoding error: \(error)")
-                    return
                 case .finished:
                     print("✅ TrendingDataApiService Request finished successfully")
-                    break
                 }
-            }, receiveValue: { [weak self] container in
-                self?.trendingCoins = container.data
-                self?.lastUpdated = container.lastUpdated?.asFormattedDate(dateType: .lastUpdated) ?? ""
+            }, receiveValue: { [weak self] response in
+                self?.trendingCoins = response.coins.map { $0.item }
+                self?.lastUpdated = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
             })
             .store(in: &subscribers)
+
     }
 }
