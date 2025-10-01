@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C216B852E8D4284000A1E9A /* NetworkingManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C216B842E8D4283000A1E9A /* NetworkingManagerMock.swift */; };
 		7C5F35C62E80064C002C9589 /* FutureValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F35C12E80064C002C9589 /* FutureValueView.swift */; };
 		7C5F35C82E80064C002C9589 /* FutureValueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F35C22E80064C002C9589 /* FutureValueViewModel.swift */; };
 		7C5F35C92E80064C002C9589 /* HistoricalCagrViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F35C42E80064C002C9589 /* HistoricalCagrViewModel.swift */; };
@@ -16,6 +17,7 @@
 		7C5F35CD2E80064C002C9589 /* BreakevenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F35BE2E80064C002C9589 /* BreakevenViewModel.swift */; };
 		7C5F35D12E80070E002C9589 /* CalculatorLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F35D02E80070B002C9589 /* CalculatorLoadingView.swift */; };
 		7C5F35D32E800725002C9589 /* CapitalGainsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5F35D22E800724002C9589 /* CapitalGainsViewModel.swift */; };
+		7CA058D22E8A6B1300330D60 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA058D12E8A6B1300330D60 /* Storyboard.storyboard */; };
 		BD11DB022B33B96E0059A028 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11DB012B33B96E0059A028 /* GlobalData.swift */; };
 		BD11DB042B33BBA10059A028 /* GlobalDataApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11DB032B33BBA10059A028 /* GlobalDataApiService.swift */; };
 		BD11DB072B349C0B0059A028 /* SummaryGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD11DB062B349C0B0059A028 /* SummaryGroupView.swift */; };
@@ -101,7 +103,19 @@
 		FBC907892B841C2400CE55E4 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC907882B841C2400CE55E4 /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7C216B932E8D43FA000A1E9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD924CC32B23BD32008836AB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD924CCA2B23BD32008836AB;
+			remoteInfo = Blockfolio;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		7C216B842E8D4283000A1E9A /* NetworkingManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManagerMock.swift; sourceTree = "<group>"; };
+		7C216B8F2E8D43FA000A1E9A /* BlockfolioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockfolioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C5F35BD2E80064C002C9589 /* BreakevenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakevenView.swift; sourceTree = "<group>"; };
 		7C5F35BE2E80064C002C9589 /* BreakevenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakevenViewModel.swift; sourceTree = "<group>"; };
 		7C5F35C02E80064C002C9589 /* CapitalGainsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitalGainsView.swift; sourceTree = "<group>"; };
@@ -111,6 +125,7 @@
 		7C5F35C42E80064C002C9589 /* HistoricalCagrViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalCagrViewModel.swift; sourceTree = "<group>"; };
 		7C5F35D02E80070B002C9589 /* CalculatorLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLoadingView.swift; sourceTree = "<group>"; };
 		7C5F35D22E800724002C9589 /* CapitalGainsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitalGainsViewModel.swift; sourceTree = "<group>"; };
+		7CA058D12E8A6B1300330D60 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		BD11DB012B33B96E0059A028 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		BD11DB032B33BBA10059A028 /* GlobalDataApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDataApiService.swift; sourceTree = "<group>"; };
 		BD11DB062B349C0B0059A028 /* SummaryGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SummaryGroupView.swift; sourceTree = "<group>"; };
@@ -198,7 +213,18 @@
 		FBD4C7372C84A09C0010838E /* Blockfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blockfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		7C216B902E8D43FA000A1E9A /* BlockfolioTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = BlockfolioTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		7C216B8C2E8D43FA000A1E9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD924CC82B23BD32008836AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,6 +265,8 @@
 				FB6E27C92B9FA99100C1882C /* Blockfolio.entitlements */,
 				BD924CCD2B23BD32008836AB /* App */,
 				FBD4C7372C84A09C0010838E /* Blockfolio.app */,
+				7C216B8F2E8D43FA000A1E9A /* BlockfolioTests.xctest */,
+				7C216B902E8D43FA000A1E9A /* BlockfolioTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -253,6 +281,7 @@
 				BD924CCE2B23BD32008836AB /* CoinPortfolioTracker.swift */,
 				BD924CD22B23BD36008836AB /* Assets.xcassets */,
 				BD924CD42B23BD36008836AB /* Preview Content */,
+				7CA058D12E8A6B1300330D60 /* Storyboard.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -355,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				BD924CF62B278AC5008836AB /* MarketDataApiService.swift */,
+				7C216B842E8D4283000A1E9A /* NetworkingManagerMock.swift */,
 				BD924D002B27BAA3008836AB /* ImageService.swift */,
 				BDC423E22B2A29A500BB92AA /* ManagedDataService.swift */,
 				BD11DB032B33BBA10059A028 /* GlobalDataApiService.swift */,
@@ -728,6 +758,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7C216B8E2E8D43FA000A1E9A /* BlockfolioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7C216B952E8D43FA000A1E9A /* Build configuration list for PBXNativeTarget "BlockfolioTests" */;
+			buildPhases = (
+				7C216B8B2E8D43FA000A1E9A /* Sources */,
+				7C216B8C2E8D43FA000A1E9A /* Frameworks */,
+				7C216B8D2E8D43FA000A1E9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7C216B942E8D43FA000A1E9A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				7C216B902E8D43FA000A1E9A /* BlockfolioTests */,
+			);
+			name = BlockfolioTests;
+			packageProductDependencies = (
+			);
+			productName = BlockfolioTests;
+			productReference = 7C216B8F2E8D43FA000A1E9A /* BlockfolioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BD924CCA2B23BD32008836AB /* Blockfolio */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BD924CD92B23BD36008836AB /* Build configuration list for PBXNativeTarget "Blockfolio" */;
@@ -754,10 +807,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Glas Engineering";
 				TargetAttributes = {
+					7C216B8E2E8D43FA000A1E9A = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = BD924CCA2B23BD32008836AB;
+					};
 					BD924CCA2B23BD32008836AB = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -779,23 +836,39 @@
 			projectRoot = "";
 			targets = (
 				BD924CCA2B23BD32008836AB /* Blockfolio */,
+				7C216B8E2E8D43FA000A1E9A /* BlockfolioTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7C216B8D2E8D43FA000A1E9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD924CC92B23BD32008836AB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				BD924CD62B23BD36008836AB /* Preview Assets.xcassets in Resources */,
 				BD924CD32B23BD36008836AB /* Assets.xcassets in Resources */,
+				7CA058D22E8A6B1300330D60 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7C216B8B2E8D43FA000A1E9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BD924CC72B23BD32008836AB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -884,6 +957,7 @@
 				BDA58A852B28E44700EBE552 /* UIApplication.swift in Sources */,
 				BD924CFA2B27ACD7008836AB /* NetworkingManager.swift in Sources */,
 				BDAC71342B2B7B4900433C40 /* DetailViewModel.swift in Sources */,
+				7C216B852E8D4284000A1E9A /* NetworkingManagerMock.swift in Sources */,
 				BDD41E892B3CB17800E0FAA8 /* Theme.swift in Sources */,
 				BD924D012B27BAA3008836AB /* ImageService.swift in Sources */,
 				BD924CF22B23DDD5008836AB /* Double.swift in Sources */,
@@ -895,7 +969,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7C216B942E8D43FA000A1E9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD924CCA2B23BD32008836AB /* Blockfolio */;
+			targetProxy = 7C216B932E8D43FA000A1E9A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7C216B962E8D43FA000A1E9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WC3A7F459D;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = oleg.BlockfolioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blockfolio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Blockfolio";
+			};
+			name = Debug;
+		};
+		7C216B972E8D43FA000A1E9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WC3A7F459D;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = oleg.BlockfolioTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blockfolio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Blockfolio";
+			};
+			name = Release;
+		};
 		BD924CD72B23BD36008836AB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1098,6 +1218,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7C216B952E8D43FA000A1E9A /* Build configuration list for PBXNativeTarget "BlockfolioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C216B962E8D43FA000A1E9A /* Debug */,
+				7C216B972E8D43FA000A1E9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BD924CC62B23BD32008836AB /* Build configuration list for PBXProject "Blockfolio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

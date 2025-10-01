@@ -3,7 +3,11 @@ import SwiftUI
 import Combine
 
 // Utility class for making URL requests and handling responses
-class NetworkingManager {
+protocol NetworkingManaging {
+    static func download(url: URL) -> AnyPublisher<Data, Error>
+}
+
+class NetworkingManager: NetworkingManaging {
     // Downloads data from a remote endpoint
     static func download(url: URL) -> AnyPublisher<Data, Error> {
         // Automatically executes task on background thread

@@ -12,7 +12,7 @@ class ManagedDataService {
     private let goalEntityName = "Goal"
     private let portfolioEntityName = "Portfolio"
     // Context to perform operations
-    private let context: NSManagedObjectContext
+    public let context: NSManagedObjectContext
     
     @Published var portfolios: [Portfolio] = []
     
@@ -27,6 +27,28 @@ class ManagedDataService {
         context = container.viewContext
         
         // Load portfolios (and create default if first load) upon app launch
+        self.loadPortfolios()
+    }
+    
+    // Конструктор для in-memory Core Data (для тестів)
+    init(inMemory: Bool) {
+        container = NSPersistentContainer(name: containerName)
+        
+        if inMemory {
+            let description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            container.persistentStoreDescriptions = [description]
+        }
+        
+        container.loadPersistentStores { _, error in
+            if let error = error {
+                fatalError("Failed to load in-memory store: \(error)")
+            }
+        }
+        
+        context = container.viewContext
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy // безпечніше для тестів
+        
         self.loadPortfolios()
     }
         
@@ -146,29 +168,33 @@ class ManagedDataService {
     }
     
     private func createManagedCoin(portfolioId: String, coin: Coin, holdingAmount: Double, costBasis: Double, isWatched: Bool) {
-        // Parent portfolio
-        guard let portfolio = portfolios.first(where: { $0.portfolioId == portfolioId }) else { return }
-        
-        // Create a new coin entity and set its portfolio relationship attribute to parent (Core Data will perform necessary matching)
+        // Fetch portfolio directly from context
+        let request = NSFetchRequest<Portfolio>(entityName: "Portfolio")
+        request.predicate = NSPredicate(format: "portfolioId == %@", portfolioId)
+        request.fetchLimit = 1
+
+        guard let portfolio = try? context.fetch(request).first else { return }
+
+        // Create new coin in the same context
         let managedCoin = ManagedCoin(context: context)
-        
         managedCoin.id = coin.id
         managedCoin.symbol = coin.symbol
         managedCoin.name = coin.name
         managedCoin.image = coin.image
         managedCoin.lastPrice = coin.currentPrice
         managedCoin.marketCapRank = Int64(coin.marketCapRank)
-        
-        // Set holdings/cost basis (may be default 0.0)
         managedCoin.holdingAmount = holdingAmount
         managedCoin.costBasis = costBasis
-        
         managedCoin.isWatched = isWatched
         managedCoin.portfolio = portfolio
         
+        // Add to portfolio's to-many relationship
+        portfolio.addToManagedCoins(managedCoin)
+
         save()
-        loadPortfolios()
+        // loadPortfolios() можна викликати тільки для UI оновлення, не обов’язково тут
     }
+
     
     // Refreshes a managed coin with fresh data from server response (updates saved price, image, rank)
     func refreshManagedCoin(managedCoin: ManagedCoin, coin: Coin) {
@@ -293,6 +319,8 @@ class ManagedDataService {
     private func save() {
         do {
             try context.save()
-        } catch {}
+        } catch {
+            print("CoreData save error: \(error)")
+        }
     }
 }

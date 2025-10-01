@@ -157,6 +157,51 @@ extension Coin {
     }
 }
 
+extension Coin {
+    init(id: String, symbol: String, name: String) {
+        self.id = id
+        self.symbol = symbol
+        self.name = name
+        self.image = ""
+        self.currentPrice = 0.0
+        self.marketCapRank = 0
+        self.marketCap = nil
+        self.fullyDilutedValuation = nil
+        self.totalVolume = nil
+        self.high24H = nil
+        self.low24H = nil
+        self.priceChange24H = nil
+        self.priceChangePercentage24H = nil
+        self.marketCapChange24H = nil
+        self.marketCapChangePercentage24H = nil
+        self.circulatingSupply = nil
+        self.totalSupply = nil
+        self.maxSupply = nil
+        self.ath = nil
+        self.athChangePercentage = nil
+        self.athDate = nil
+        self.atl = nil
+        self.atlChangePercentage = nil
+        self.atlDate = nil
+        self.sparklineIn7D = nil
+        self.sparklineLastUpdated = nil
+        self.priceChangePercentage7D = nil
+        self.priceChangePercentage14D = nil
+        self.priceChangePercentage30D = nil
+        self.priceChangePercentage1Y = nil
+        self.recommendedCoins = nil
+        self.blockTime = nil
+        self.hashingAlgorithm = nil
+        self.description = nil
+        self.homepageUrl = nil
+        self.subredditUrl = nil
+        self.genesisDate = nil
+        self.positiveSentimentPercentage = nil
+        self.currentHoldings = nil
+        self.costBasis = nil
+    }
+}
+
 struct SparklineIn7D: Codable {
     let price: [Double]?
 }
